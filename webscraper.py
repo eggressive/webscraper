@@ -131,8 +131,12 @@ async def main():
     target_url = "https://www.deeplearning.ai/courses"  # Deeplearning AI courses
     base_url = "https://deeplearning.ai"
 
-    instructions = """
-        Get all the courses
+    subject = "Retrieval Augmented Generation (RAG) "
+    instructions = f"""
+    Read the description of the courses and only 
+    provide the three courses that are about {subject}. 
+    Make sure that we don't have any other
+    cources in the output
     """
     # Call the webscraper function
     result, screenshot = await webscraper(target_url, instructions)
