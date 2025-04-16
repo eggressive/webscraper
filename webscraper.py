@@ -83,7 +83,7 @@ class DeeplearningCourseList(BaseModel):
 # LLM Client for Open AI
 async def process_with_llm(html, instructions, truncate = False):
     completion = client.beta.chat.completions.parse(
-        model="gpt-4o-mini-2024-07-18",
+        model="o4-mini-2025-04-16",
         messages=[{
             "role": "system",
             "content": f"""
@@ -101,7 +101,7 @@ async def process_with_llm(html, instructions, truncate = False):
             "role": "user",
             "content": html[:150000]  # Truncate to stay under token limits
         }],
-        temperature=0.1,  # 1 for o4-mini model
+        temperature=1,  # 1 for o4-mini model
         response_format=DeeplearningCourseList,
         )
     return completion.choices[0].message.parsed
@@ -133,10 +133,8 @@ async def main():
 
     subject = "Retrieval Augmented Generation (RAG) "
     instructions = f"""
-    Read the description of the courses and only 
-    provide the three courses that are about {subject}. 
-    Make sure that we don't have any other
-    cources in the output
+    Can you get the summary of the top course on
+    {subject} provide the learnings from it
     """
     # Call the webscraper function
     result, screenshot = await webscraper(target_url, instructions)
