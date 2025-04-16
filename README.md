@@ -40,7 +40,7 @@ To run the web scraper, follow these steps:
 
 1. Configure your API keys in a `.env` file. The format for the `.env` file should be:
 
-```
+```bash
 OPENAI_API_KEY=your_openai_api_key
 MULTION_API_KEY=your_multion_api_key
 ```
