@@ -4,6 +4,30 @@ Webscraper agent
 
 ## Installation
 
+## Virtual Environment
+
+It is recommended to use a Python virtual environment to manage dependencies. To create and activate a virtual environment, follow these steps:
+
+1. Create a virtual environment:
+
+```bash
+python -m venv venv
+```
+
+2. Activate the virtual environment:
+
+- On Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+- On macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
 To install the necessary dependencies, run the following command:
 
 ```bash
