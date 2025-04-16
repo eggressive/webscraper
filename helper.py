@@ -34,16 +34,15 @@ def get_multi_on_client():
 # Params
 async def visualizeCourses(result, screenshot, target_url, instructions, base_url):
     # Run the async process that returns an instance of DeeplearningCourseList and screenshot bytes
-    
+    html_output = ""
 
     if result:
         # Convert each course to a dict (using model_dump from Pydantic v2)
         courses_data = [course.model_dump() for course in result.courses]
 
         for course in courses_data:
-          if course['courseURL']:
-            course['courseURL'] = f'<a href="{base_url}{course["courseURL"]}" target="_blank">{course["title"]}</a>'
-
+            if course['courseURL']:
+                course['courseURL'] = f'<a href="{base_url}{course["courseURL"]}" target="_blank">{course["title"]}</a>'
 
         # Build an HTML table if course data is available
         if courses_data:
@@ -77,9 +76,9 @@ async def visualizeCourses(result, screenshot, target_url, instructions, base_ur
         else:
             table_html = "<p>No course data available.</p>"
 
-        # Display the course data table
-        display(Markdown("### Scraped Course Data:"))
-        display(HTML(table_html))
+        # Add the course data table to the HTML output
+        html_output += "<h3>Scraped Course Data:</h3>"
+        html_output += table_html
 
         # Convert the screenshot bytes into a base64 string and embed it in an <img> tag
         img_b64 = base64.b64encode(screenshot).decode('utf-8')
@@ -87,7 +86,9 @@ async def visualizeCourses(result, screenshot, target_url, instructions, base_ur
             f'<img src="data:image/png;base64,{img_b64}" '
             f'alt="Website Screenshot" style="max-width:100%; height:auto;">'
         )
-        display(Markdown("### Website Screenshot:"))
-        display(HTML(img_html))
+        html_output += "<h3>Website Screenshot:</h3>"
+        html_output += img_html
+
+    return html_output
 
 
